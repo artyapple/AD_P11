@@ -1,3 +1,4 @@
+package rsa.services;
 
 public class PrimeCheck {
 	
