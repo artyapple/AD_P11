@@ -2,17 +2,17 @@ package rsa.keys;
 
 public class RSAKeyPair {
 	
-	private final RSAKey openkey;
-	private final RSAKey seckey;
+	private final RSAKey publicKey;
+	private final RSAKey privateKey;
 	
 	public RSAKeyPair(RSAKey openkey, RSAKey seckey) {
-		this.openkey = openkey;
-		this.seckey = seckey;
+		this.publicKey = openkey;
+		this.privateKey = seckey;
 	}
-	public RSAKey getOpenkey() {
-		return openkey;
+	public RSAKey getPublicKey() {
+		return publicKey;
 	}
-	public RSAKey getSeckey() {
-		return seckey;
+	public RSAKey getPrivateKey() {
+		return privateKey;
 	}
 }

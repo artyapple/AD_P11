@@ -19,17 +19,17 @@ public class RSAService {
 		return new RSAKeyPair(openkey, seckey);
 	}
 	
-	public BigInteger encrypt(RSAKey key, int msg) {
+	public int encrypt(RSAKey key, int msg) {
 		BigInteger bi1, bi2, bi3;
 		bi1 = BigInteger.valueOf(msg);
 		bi3 = BigInteger.valueOf(key.getMod());
 		bi2 = bi1.pow(key.getExp());
-		return bi2.mod(bi3);
+		return bi2.mod(bi3).intValue();
 	}
 
-	public int decrypt(RSAKey key, BigInteger crmsg) {
+	public int decrypt(RSAKey key, int crmsg) {
 		BigInteger bi1, bi2, bi3;
-		bi1 = crmsg;
+		bi1 = BigInteger.valueOf(crmsg);
 		bi3 = BigInteger.valueOf(key.getMod());
 		bi2 = bi1.pow(key.getExp());
 		bi2 = bi2.mod(bi3);

@@ -15,7 +15,7 @@ public class RSATest {
 	private final int testMessage = 217;
 	private RSAService serv;
 	private RSAKeyPair pair;
-	private BigInteger encMessage;
+	private int encMessage;
 
 	@Before
 	public void before() {
@@ -26,9 +26,9 @@ public class RSATest {
 	@Test
 	public void testRSA() {
 		//verschlüsseln
-		encMessage = serv.encrypt(pair.getSeckey(), testMessage);
+		encMessage = serv.encrypt(pair.getPublicKey(), testMessage);
 		//entschlüsseln
-		int deMessage = serv.decrypt(pair.getOpenkey(), encMessage);
+		int deMessage = serv.decrypt(pair.getPrivateKey(), encMessage);
 		assertEquals(testMessage, deMessage);
 	}
 
