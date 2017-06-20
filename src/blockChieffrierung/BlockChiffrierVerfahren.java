@@ -49,7 +49,7 @@ public class BlockChiffrierVerfahren {
 		intKryptArray[0] = firstKey;
 		intKryptArray[1] = secondKey;
 		if (intClearArray[0] != 0) {
-			for (int i = 0; i < intClearArray.length; i++) {
+			for (int i = 0; i < intClearArray.length; i+=2) {
 				intKryptArray[i + 8] = (intClearArray[i] + firstKey) % BASIS;
 				if ((i + 1) < intClearArray.length) {
 					intKryptArray[i + 1 + 8] = (intClearArray[i + 1] + secondKey) % BASIS;
@@ -79,8 +79,9 @@ public class BlockChiffrierVerfahren {
 		char[] charClearArrayNew = new char[cryptedIntArray.length - 8];
 		int[] intClearArray = new int[cryptedIntArray.length - 8];
 
-		for (int i = 0; i < intClearArray.length; i++) {
-			if (s0 > cryptedIntArray[i + 8]) {
+		for (int i = 0; i < intClearArray.length; i+=2) {
+			
+			if (s0 > cryptedIntArray[i +8]) {
 				intClearArray[i] = cryptedIntArray[i + 8] + BASIS - s0;
 			} else {
 				intClearArray[i] = cryptedIntArray[i + 8] - s0;

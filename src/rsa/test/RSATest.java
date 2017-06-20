@@ -26,9 +26,9 @@ public class RSATest {
 	@Test
 	public void testRSA() {
 		//verschlüsseln
-		encMessage = serv.encrypt(pair.getPrivateKey(), testMessage);
+		encMessage = serv.encrypt(pair.getPublicKey(), testMessage);
 		//entschlüsseln
-		int deMessage = serv.decrypt(pair.getPublicKey(), encMessage);
+		int deMessage = serv.decrypt(pair.getPrivateKey(), encMessage);
 		assertEquals(testMessage, deMessage);
 	}
 

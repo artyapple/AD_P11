@@ -71,15 +71,18 @@ public class Hybrid {
 				+(cryptedIntArray[1]*(int) Math.pow(BASIS, 2))
 				+(cryptedIntArray[2]*(int) Math.pow(BASIS, 1))
 				+(cryptedIntArray[3]*(int) Math.pow(BASIS, 0));
-		
+		//System.out.println("RSASessionKey0: "+rsaSessionKey0);
 		int rsaSessionKey1=(cryptedIntArray[4]*(int) Math.pow(BASIS, 3))
 				+(cryptedIntArray[5]*(int) Math.pow(BASIS, 2))
 				+(cryptedIntArray[6]*(int) Math.pow(BASIS, 1))
 				+(cryptedIntArray[7]*(int) Math.pow(BASIS, 0));
 		//Dechiffrieren Sie den Session-Key mit dem privaten Schlüssel des RSA-Verfahrens
-		
+		//System.out.println("RSASessionKey1: "+rsaSessionKey1);
 		int sessionKey0 = new RSAService().decrypt(privateKey, rsaSessionKey0);
+		//System.out.println("SessionKey0: "+sessionKey0);
+		
 		int sessionKey1 = new RSAService().decrypt(privateKey, rsaSessionKey1);
+		//System.out.println("SessionKey1: "+sessionKey1);
 		//Dechiffrieren Sie den Text mit dem Session-Key ??? Es sind doch zwei Session Keys???
 		cryptedIntArray[0]=sessionKey0;
 		cryptedIntArray[1]=sessionKey1;
@@ -103,16 +106,36 @@ public class Hybrid {
 	
 	
 	public static void main(String[] args) {
-		RSAKeyPair keys = new RSAService().genKeyPair();
-		System.out.println("PrivateKey: "+keys.getPrivateKey());
-		System.out.println("PublicKey: "+keys.getPublicKey());
+		//RSAKeyPair keys = new RSAService().genKeyPair();
+		//System.out.println("PrivateKey: "+keys.getPrivateKey());
+		//System.out.println("PublicKey: "+keys.getPublicKey()+"\nPublic exp: "+keys.getPublicKey().getExp()
+		//		+"\nPublic N: "+keys.getPublicKey().getMod());
+		//System.out.println("PrivateKey: "+keys.getPrivateKey());
+		//System.out.println("PrivateKey: "+keys.getPrivateKey()+"\nPrivate exp: "+keys.getPrivateKey().getExp()
+		//		+"\nPrivate N: "+keys.getPrivateKey().getMod());
+		
 		Hybrid hybrid = new Hybrid();
 		//Wenn jemand mir eine Nachricht schicken will muss dieser Seinen Text mit dem PublicKey verschlüsseln
 		//und anschließend die Nachricht versenden
-		String cryptedMessage = hybrid.encryption("Hallo Phil wie geht es dir?",keys.getPublicKey());
+		
+		
+		
+		RSAKey keyPublicLuis = new RSAKey(3189, 46117);
+		RSAKey keyPublicRobert = new RSAKey(37, 38021);
+		RSAKey keyPrivateLuis = new RSAKey(12249, 46117);
+		
+		RSAKey keyPublicHorny = new RSAKey(46823, 54889);
+		
+		RSAKey keyPrivateOWNER_OLD = new RSAKey(8395, 28103);
+		
+		RSAKey keyPublicOWNER = new RSAKey(53, 39917);
+		RSAKey keyPrivateOWNER = new RSAKey(30569, 39917);
+		
+		String cryptedMessage = hybrid.encryption("consetetur sadipscing elitr",keyPublicRobert);
 		System.out.println("Kryptierte Nachricht: "+cryptedMessage);
 		//Wenn ich die Nachicht erhalten habe, muss ich die Nachricht über den PrivateKey verschlüsseln
-		String decryptedMessage = hybrid.decryption(cryptedMessage,keys.getPrivateKey());
+		
+		String decryptedMessage = hybrid.decryption(" #^i \",Lj!1v,1(\"2',1#!+!112z31 ~$&J1\"!-%$&$&4$>% u(\"2t( &1$}(&1=>%$u>u(r,1-!-',+>v($,!#13v,\".$>z-((u4 314&>} s.$$1$&>u.}.$$1,r&  1 }(#4+ ~>v1r3=>%$u>u(r,15!+'/&4rL1_&>($$.1$!21$&>r\"t4% ~>v31)'2&.1#'.1#!+!1v21$&>v 11v!',?>d3v31\"}(& 1*r2u>x4s$$&$$ J1-!>%$r>& |(~ & 12r-t3'21$%31j!1v,1(\"2',1#!+!112z31 ~$&L1j!1v,1(\"2',1#!+!112z31 ~$&J1\"!-%$&$&4$>% u(\"2t( &1$}(&1=>%$u>u(r,1-!-',+>v($,!#13v,\".$>z-((u4 314&>} s.$$1$&>u.}.$$1,r&  1 }(#4+ ~>v1r3=>%$u>u(r,15!+'/&4rL1_&>($$.1$!21$&>r\"t4% ~>v31)'2&.1#'.1#!+!1v21$&>v 11v!',?>d3v31\"}(& 1*r2u>x4s$$&$$ J1-!>%$r>& |(~ & 12r-t3'21$%31j!1v,1(\"2',1#!+!112z31 ~$&L",keyPrivateOWNER);
 		System.out.println("Decodierte Nachricht: "+decryptedMessage);
 
 	}
